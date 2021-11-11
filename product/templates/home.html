@@ -26,9 +26,9 @@
 						<figure>
 							<img src="img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
 							<figcaption>
-								<h4 class="tm-gallery-title">{{ product.name }}</h4>
+								<h4 class="tm-gallery-title"><a href="{% url 'detail' product.id %}" {{ product.name }}</h4>
 								<p class="tm-gallery-description">{{ product.description|truncatechars:50 }}</p>
-								<p class="tm-gallery-price">$45 / $55</p>
+								<p class="tm-gallery-price">{{ product.price }} $ </p>
 							</figcaption>
 						</figure>
 					</article>
