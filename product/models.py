@@ -3,12 +3,12 @@ from django.db import models
 class Category(models.Model):
     title = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(primary_key=True)
-    parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE, related_name='children')
+    # parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE, related_name='children')
 
-    def __str__(self):
-        if self.parent:
-            return f'{self.parent}  -->  {self.title}'
-        return self.title
+    # def __str__(self):
+    #     if self.parent:
+    #         return f'{self.parent}  -->  {self.title}'
+    #     return self.title
 
 
 class Product(models.Model):
@@ -23,6 +23,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+    created = models.DateTimeField(auto_now_add=True)
 
 
     def get_absolute_url(self):
