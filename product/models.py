@@ -12,18 +12,18 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    STATUS_CHOICES = (
-        ('in stock', 'In stock'),
-        ('out of stock', 'Out of stock'),
-        ('awaiting', 'Awaiting')
+    BAND_CHOICES = (
+        ('metal', 'Metal'),
+        ('leather', 'Leather'),
+        ('silicone', 'Silicone')
     )
 
     name = models.CharField(max_length=155)
-    status = models.CharField(choices=STATUS_CHOICES, max_length=20)
+    band = models.CharField(choices=BAND_CHOICES, max_length=20)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
-    image = models.ImageField(upload_to='prod_images')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+
 
     def get_absolute_url(self):
         from django.urls import reverse
@@ -31,4 +31,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+class Image(models.Model):
+    image = models.ImageField(upload_to='products')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
+
 
