@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'account',
     'product',
     'order',
+
+    # libs
+    'crispy_forms',
 ]
 
 AUTH_USER_MODEL = 'account.CustomUser'
@@ -137,3 +140,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
