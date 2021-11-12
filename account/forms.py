@@ -1,6 +1,10 @@
 from django import forms
+# from django.contrib.auth.models import User
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+# from django.contrib.auth import get_user_model
+# User = get_user_model()
+from account.models import CustomUser
 
 
 def send_welcome_email(email):
@@ -22,13 +26,13 @@ class RegistrationForm(forms.ModelForm):
 
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = ('username', 'email', 'password',
                   'password_confirmation')
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        if User.objects.filter(email=email).exists():
+        if CustomUser.objects.filter(email=email).exists():
             raise forms.ValidationError('User with such email already exists')
         return email
 
@@ -42,7 +46,7 @@ class RegistrationForm(forms.ModelForm):
         return data
 
     def save(self, commit=True):
-        user = User.objects.create_user(**self.cleaned_data)
-        send_welcome_email(user.email)
+        user = CustomUser.objects.create_user(**self.cleaned_data)
+        # send_welcome_email(user.email)
         return user
 

@@ -24,7 +24,7 @@ class Product(models.Model):
     description = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     created = models.DateTimeField(auto_now_add=True)
-
+    
 
     def get_absolute_url(self):
         from django.urls import reverse
