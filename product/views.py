@@ -5,6 +5,7 @@ from django.views.generic import ListView, TemplateView, DetailView, CreateView,
 from django.views.generic.list import BaseListView
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
+from comment.forms import ReviewAddForm
 from .forms import ProductInline, UpdateProductForm, ImageInline
 from .models import Category, Product, Image
 
@@ -40,6 +41,11 @@ class ProductDetailView(DetailView):
     template_name = 'detail.html'
     context_object_name = 'product'
     pk_url_kwarg = 'product_id'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        context['comment_form'] = ReviewAddForm()
+        return context
 
 class IsAdminCheckMixin(UserPassesTestMixin):
     def test_func(self):
@@ -82,6 +88,7 @@ class ProductDeleteView(IsAdminCheckMixin, DeleteView):
     model = Product
     template_name = 'delete_product.html'
     pk_url_kwarg = 'product_id'
+
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()

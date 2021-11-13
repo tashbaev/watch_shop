@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'account',
     'product',
     'order',
+    'comment',
 
     # libs
     'crispy_forms',
