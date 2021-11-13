@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     # libs
     'crispy_forms',
+    'extra_views',
 ]
 
 AUTH_USER_MODEL = 'account.CustomUser'
