@@ -7,9 +7,10 @@
 			<div class="tm-paging-links">
 				<nav>
 					<ul>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link active">Мужские часы</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">Женские часы</a></li>
-						<li class="tm-paging-item"><a href="#" class="tm-paging-link">Смарт часы</a></li>
+						<li class="tm-paging-item"><a href="" class="tm-paging-link active">Все</a></li>
+						<li class="tm-paging-item"><a href="#" class="tm-paging-link ">Мужские</a></li>
+						<li class="tm-paging-item"><a href="#" class="tm-paging-link">Женские</a></li>
+						<li class="tm-paging-item"><a href="#" class="tm-paging-link">Смарт-часы</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -17,13 +18,13 @@
 			<!-- Gallery -->
 			<div class="row tm-gallery">
 				<!-- gallery page 1 -->
-				<div id="tm-gallery-page-pizza" class="tm-gallery-page">
+				<div id="tm-gallery-page-Все" class="tm-gallery-page">
 					{% for product in products %}
 					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 						<figure>
 							<img src="img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
 							<figcaption>
-								<h4 class="tm-gallery-title"><a href="{% url 'detail' product.id %}" {{ product.name }}</h4>
+								<h4 class="tm-gallery-title"><a href="{% url 'detail' product.id %}">{{ product.name }}</a> </h4>
 								<p class="tm-gallery-description">{{ product.description|truncatechars:50 }}</p>
 								<p class="tm-gallery-price">{{ product.price }} $ </p>
 							</figcaption>
@@ -31,72 +32,56 @@
 					</article>
 					{% endfor %}
 
-				</div> <!-- gallery page 2 -->
+				</div>
 
 				<!-- gallery page 3 -->
-				<div id="tm-gallery-page-noodle" class="tm-gallery-page hidden">
+				<div id="tm-gallery-page-Мужские" class="tm-gallery-page hidden">
+					{% for product in men %}
 					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 						<figure>
-							<img src="img/gallery/08.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+							<img src="img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
 							<figcaption>
-								<h4 class="tm-gallery-title">Noodle One</h4>
-								<p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-								<p class="tm-gallery-price">$12.50</p>
+								<h4 class="tm-gallery-title"><a href="{% url 'detail' product.id %}">{{ product.name }}</a> </h4>
+								<p class="tm-gallery-description">{{ product.description|truncatechars:50 }}</p>
+								<p class="tm-gallery-price">{{ product.price }} $ </p>
 							</figcaption>
 						</figure>
 					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/07.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Noodle Second</h4>
-								<p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-								<p class="tm-gallery-price">$15.50</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/06.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Third Soft Noodle</h4>
-								<p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-								<p class="tm-gallery-price">$20.50</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/05.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Aliquam sagittis</h4>
-								<p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-								<p class="tm-gallery-price">$30.25</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/04.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Maecenas eget justo</h4>
-								<p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-								<p class="tm-gallery-price">$35.50</p>
-							</figcaption>
-						</figure>
-					</article>
-					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-						<figure>
-							<img src="img/gallery/03.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-							<figcaption>
-								<h4 class="tm-gallery-title">Quisque et felis eros</h4>
-								<p class="tm-gallery-description">Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-								<p class="tm-gallery-price">$40.50</p>
-							</figcaption>
-						</figure>
-					</article>
+					{% endfor %}
 
-				</div> <!-- gallery page 3 -->
+				</div>
+				<!-- gallery page 3 -->
+				<div id="tm-gallery-page-Женские" class="tm-gallery-page hidden">
+					{% for product in women %}
+					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+						<figure>
+							<img src="img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+							<figcaption>
+								<h4 class="tm-gallery-title"><a href="{% url 'detail' product.id %}">{{ product.name }}</a> </h4>
+								<p class="tm-gallery-description">{{ product.description|truncatechars:50 }}</p>
+								<p class="tm-gallery-price">{{ product.price }} $ </p>
+							</figcaption>
+						</figure>
+					</article>
+					{% endfor %}
+
+				</div>
+				<!-- gallery page 4 -->
+				<div id="tm-gallery-page-Смарт-часы" class="tm-gallery-page hidden">
+					{% for product in smart %}
+					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+						<figure>
+							<img src="img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+							<figcaption>
+								<h4 class="tm-gallery-title"><a href="{% url 'detail' product.id %}">{{ product.name }}</a> </h4>
+								<p class="tm-gallery-description">{{ product.description|truncatechars:50 }}</p>
+								<p class="tm-gallery-price">{{ product.price }} $ </p>
+							</figcaption>
+						</figure>
+					</article>
+					{% endfor %}
+
+				</div>
 			</div>
 			<div class="tm-section tm-container-inner">
 				<div class="row">

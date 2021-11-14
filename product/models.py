@@ -5,10 +5,8 @@ class Category(models.Model):
     slug = models.SlugField(primary_key=True)
     # parent = models.ForeignKey('self', blank=True, null=True, on_delete=models.CASCADE, related_name='children')
 
-    # def __str__(self):
-    #     if self.parent:
-    #         return f'{self.parent}  -->  {self.title}'
-    #     return self.title
+    def __str__(self):
+        return self.title
 
 
 class Product(models.Model):
