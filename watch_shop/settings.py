@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # libs
     'crispy_forms',
     'extra_views',
+    # 'django-filters',
 ]
 
 AUTH_USER_MODEL = 'account.CustomUser'
@@ -147,3 +148,4 @@ CRISPY_TEMPLATE_PACK = 'uni_form'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+

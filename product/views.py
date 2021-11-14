@@ -1,22 +1,19 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.db.models import Q
-from django.shortcuts import render, redirect
-from django.views.generic import ListView, TemplateView, DetailView, CreateView, DeleteView, UpdateView
-from django.views.generic.list import BaseListView
+from django.shortcuts import redirect, render
+from django.views.generic import ListView, DetailView, DeleteView
+
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
 from comment.forms import ReviewAddForm
-from comment.models import Review
-from .forms import ProductInline, UpdateProductForm, ImageInline
-from .models import Category, Product, Image
+from .forms import ImageInline
+from .models import Category, Product
 
 
 class SearchListView(ListView):
     model = Product
     template_name = 'search.html'
     context_object_name = 'results'
-
-
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -37,21 +34,32 @@ class CategoryListView(ListView):
 
 
 class ProductListView(ListView):
+    paginate_by = 10
     model = Product
     template_name = 'home.html'
     context_object_name = 'products'
 
     def get_context_data(self, **kwargs):
         context = super(ListView, self).get_context_data(**kwargs)
-        # print(self.kwargs)
-        # context['product_id'] = id_
-        # context['comment_form'] = ReviewAddForm()
-        context['men'] = Product.objects.filter(category='men')
-        context['women'] = Product.objects.filter(category='women')
-        context['smart'] = Product.objects.filter(category='smart')
+        context['men'] = self.model.objects.filter(category='men')
+        context['women'] = self.model.objects.filter(category='women')
+        context['smart'] = self.model.objects.filter(category='smart')
         return context
 
-
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # search_word = self.request.GET.get('q')
+        print(self.request)
+        band = self.request.GET.get('band')
+        price_min = self.request.GET.get('pmax')
+        price_max = self.request.GET.get('pmin')
+        if band is not None:
+            queryset = queryset.filter(band=band)
+        if price_min is not None:
+            queryset = queryset.filter(price__lte=price_min)
+        if price_max is not None:
+            queryset = queryset.filter(price__gte=price_max)
+        return queryset
 
 
 class ProductDetailView(DetailView):
@@ -60,25 +68,11 @@ class ProductDetailView(DetailView):
     context_object_name = 'product'
     pk_url_kwarg = 'product_id'
 
-
     def get_context_data(self, **kwargs):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
-        # print(self.kwargs)
-        # context['product_id'] = id_
         context['comment_form'] = ReviewAddForm()
-        # context['mens'] = model.objects.filter(category='men')
-        # context['comments'] = Product.comments
-        # print(context)
-
-
         return context
 
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #     # id_ = self.kwargs.get('id')
-    #     # queryset = queryset.filter(review__product=id_)
-    #     print(queryset)
-    #     return queryset
 
 class IsAdminCheckMixin(UserPassesTestMixin):
     def test_func(self):
@@ -106,17 +100,6 @@ class ProductUpdateView(UpdateWithInlinesView):
         return self.object.get_absolute_url()
 
 
-# class ProductCreateView(IsAdminCheckMixin, CreateView):
-#     model = Product
-#     template_name = 'create_product.html'
-#     form_class = CreateProductForm
-#     # context_object_name = 'product_form'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['product_form'] = self.get_form(self.get_form_class())
-#         return context
-
 class ProductDeleteView(IsAdminCheckMixin, DeleteView):
     model = Product
     template_name = 'delete_product.html'
@@ -128,14 +111,7 @@ class ProductDeleteView(IsAdminCheckMixin, DeleteView):
         slug = self.object.category.slug
         self.object.delete()
         return redirect('list', slug)
-#
-# class ProductUpdateView(IsAdminCheckMixin, UpdateView):
-#     model = Product
-#     template_name = 'update_product.html'
-#     form_class = UpdateProductForm
-#     pk_url_kwarg = 'product_id'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['product_form'] = self.get_form(self.get_form_class())
-#         return context
+
+def filter_product_list(request):
+    print(request)
+    return render(request, ProductListView, )
