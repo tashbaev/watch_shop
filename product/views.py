@@ -16,6 +16,8 @@ class SearchListView(ListView):
     template_name = 'search.html'
     context_object_name = 'results'
 
+
+
     def get_queryset(self):
         queryset = super().get_queryset()
         # print(self.request.GET)
@@ -39,6 +41,17 @@ class ProductListView(ListView):
     template_name = 'home.html'
     context_object_name = 'products'
 
+    def get_context_data(self, **kwargs):
+        context = super(ListView, self).get_context_data(**kwargs)
+        # print(self.kwargs)
+        # context['product_id'] = id_
+        # context['comment_form'] = ReviewAddForm()
+        context['men'] = Product.objects.filter(category='men')
+        context['women'] = Product.objects.filter(category='women')
+        context['smart'] = Product.objects.filter(category='smart')
+        return context
+
+
 
 
 class ProductDetailView(DetailView):
@@ -50,20 +63,21 @@ class ProductDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
-        id_ = self.kwargs.get('id')
+        # print(self.kwargs)
         # context['product_id'] = id_
         context['comment_form'] = ReviewAddForm()
-        # context['comment_form'].Product = id_
+        # context['mens'] = model.objects.filter(category='men')
         # context['comments'] = Product.comments
-        print(context)
+        # print(context)
 
 
         return context
-    #
+
     # def get_queryset(self):
     #     queryset = super().get_queryset()
-    #     id_ = self.kwargs.get('id')
-    #     queryset = queryset.filter(review__product=id_)
+    #     # id_ = self.kwargs.get('id')
+    #     # queryset = queryset.filter(review__product=id_)
+    #     print(queryset)
     #     return queryset
 
 class IsAdminCheckMixin(UserPassesTestMixin):
