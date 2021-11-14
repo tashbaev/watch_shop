@@ -1,5 +1,6 @@
 from django.urls import path
 
+from comment.views import ReviewAdd
 from .views import ProductListView, ProductDetailView, ProductCreateView, ProductUpdateView, ProductDeleteView, \
     SearchListView
 
@@ -12,5 +13,6 @@ urlpatterns = [
     path('product/delete/<int:product_id>/', ProductDeleteView.as_view(),
          name='product-delete'),
     path('search', SearchListView.as_view(), name='search'),
+    path('comment/<int:product_id>', ReviewAdd.as_view(), name="add-review", ),
 
 ]

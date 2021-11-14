@@ -43,7 +43,7 @@ https://templatemo.com/tm-539-simple-house
 								<li class="tm-nav-li"><a href="contact.html" class="tm-nav-link">Contact</a></li>
 								<li class="tm-nav-li"><form method="get" action="{% url 'search' %}" class="d-flex">
 									<input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          							<button class="btn tm-paging-link" type="submit">Search</button>
+<!--          							<button class="btn tm-paging-link" type="submit">Search</button>-->
         						</form></li>
 							</ul>
 						</nav>	
@@ -51,7 +51,7 @@ https://templatemo.com/tm-539-simple-house
 				</div>
 			</div>
 		</div>
-
+		<h3>{% block page %} {% endblock %}</h3>
 		{% block content %}
 		{% endblock %}
 

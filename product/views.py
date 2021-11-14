@@ -6,6 +6,7 @@ from django.views.generic.list import BaseListView
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
 from comment.forms import ReviewAddForm
+from comment.models import Review
 from .forms import ProductInline, UpdateProductForm, ImageInline
 from .models import Category, Product, Image
 
@@ -26,15 +27,19 @@ class SearchListView(ListView):
                                         Q(description__icontains=search_word))
         return queryset
 
+
 class CategoryListView(ListView):
     model = Category # Category.objects.all()
     template_name = 'home.html'
     context_object_name = 'categories'
 
+
 class ProductListView(ListView):
     model = Product
     template_name = 'home.html'
     context_object_name = 'products'
+
+
 
 class ProductDetailView(DetailView):
     model = Product # Product.objects.get(product_id)
@@ -42,10 +47,24 @@ class ProductDetailView(DetailView):
     context_object_name = 'product'
     pk_url_kwarg = 'product_id'
 
+
     def get_context_data(self, **kwargs):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
+        id_ = self.kwargs.get('id')
+        # context['product_id'] = id_
         context['comment_form'] = ReviewAddForm()
+        # context['comment_form'].Product = id_
+        # context['comments'] = Product.comments
+        print(context)
+
+
         return context
+    #
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #     id_ = self.kwargs.get('id')
+    #     queryset = queryset.filter(review__product=id_)
+    #     return queryset
 
 class IsAdminCheckMixin(UserPassesTestMixin):
     def test_func(self):
