@@ -4,3 +4,4 @@ Pillow==7.1
 django-shopping-cart
 python-decouple==3.0
 django-crispy-forms
+django-extra-views
