@@ -3,9 +3,9 @@
 {% block content %}
     <main>
 		<h3>  Filter:</h3>
-<form method="get" action="{% url 'home' %}" class="d-flex">
+<form method="get" action="{% url 'home' %}" class="d-flex ">
 	<ul style="display: inline;">
-		<li style="display: inline;">
+		<li class="tm-contact-form" style="display: inline;">
 	<select name="band" title="Band type">
 		<option value="metal">Metal</option>
 		<option value="leather">Leather</option>
@@ -40,11 +40,12 @@
 					{% for product in page_obj %}
 					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 						<figure>
-							<img src="img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+							<img style="height: 300px;" src="{{ product.get_image }} " alt="Image" class="img-fluid tm-gallery-img" />
 							<figcaption>
 								<h4 class="tm-gallery-title"><a href="{% url 'detail' product.id %}">{{ product.name }}</a> </h4>
 								<p class="tm-gallery-description">{{ product.description|truncatechars:50 }}</p>
 								<p class="tm-gallery-price">{{ product.price }} $ </p>
+								<h5>{{ product.get_image }}</h5>
 							</figcaption>
 						</figure>
 					</article>

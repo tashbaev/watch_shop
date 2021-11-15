@@ -6,6 +6,7 @@ from django.views.generic import ListView, DetailView, DeleteView
 from extra_views import CreateWithInlinesView, UpdateWithInlinesView
 
 from comment.forms import ReviewAddForm
+from watch_shop.settings import MEDIA_ROOT
 from .forms import ImageInline
 from .models import Category, Product
 
@@ -38,6 +39,7 @@ class ProductListView(ListView):
     model = Product
     template_name = 'home.html'
     context_object_name = 'products'
+    # print(MEDIA_ROOT)
 
 
     def get_queryset(self):

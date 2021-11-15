@@ -16,7 +16,8 @@ class ReviewAdd(CreateView):
         self.object = form.save(commit=False)
         # product = get_object_or_404(Product, id=self.kwargs['product_id'])
         self.object.product_id = self.kwargs['product_id']
-        self.object.verified = False
+        print(self.request.user)
+        self.object.name = str(self.request.user)
 
         self.object.save()
         return super(ReviewAdd, self).form_valid(form)

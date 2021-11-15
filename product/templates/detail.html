@@ -1,28 +1,53 @@
 {% extends 'base.html' %}
 {% block content %}
 <main>
-<div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="..." class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">{{ product.name }}</h5>
-        <p class="card-text">{{ product.description }}</p>
-        <p class="card-text"><small class="text-muted">{{ product.created }}</small></p>
-      </div>
-    </div>
-  </div>
-</div>
-    {% for comment in product.comments.all %}
+<div class="tm-container-inner tm-history">
+				<div class="row">
+					<div class="col-12">
+						<div class="tm-history-inner">
+							<img src="{{ product.get_image }}" alt="Image" class="img-fluid tm-history-img" />
+							<div class="tm-history-text">
+								<h4 class="tm-history-title">{{ product.name }}</h4>
+                                <h6 style="color: black;" class="tm-history-title">{{ product.price }} $</h6>
+
+								<p class="tm-mb-p">{{ product.description }}</p>
+                                <small>{{ product.created }}</small>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
     <h1>{{ comment.body }}</h1>
-    {% endfor %}
-   <form action="{% url 'add-review' product.id %}" method="post" enctype="multipart/form-data">
-        {{ comment_form.as_p }}
+
+	<div class="row">
+		<div class="col-md-6">
+			    {% for comment in product.comments.all %}
+
+<div style="margin-left: 60px; margin-top: 30px;" class="tm-address-box">
+							<h6 style="margin-bottom: 0px;" class="tm-info-title tm-text-success">aвтор: {{ comment.name }} </h6>
+							<small>Дата создания: {{ comment.created }}</small>
+							<p>
+							{{ comment.body }}
+							</p>
+
+						</div>
+			    {% endfor %}
+
+		</div>
+	<div style="margin-top: 30px;" class="col-md-6">
+
+		<form action="{% url 'add-review' product.id %}" method="post" enctype="multipart/form-data" class="tm-contact-form">
+	           <div class="form-group form-group tm-d-flex" >
+                            {{ comment_form.as_p }}
         {% csrf_token %}
 
-        <button type="submit" class="btn btn-success">Publicte</button>
-    </form>
+
+
+                                <button type="submit" class="tm-btn tm-btn-success">Publicte</button>
+					        </div>
+						</form>
+	</div>
+		</div>
 </main>
 {% endblock %}
