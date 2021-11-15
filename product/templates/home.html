@@ -5,17 +5,17 @@
 		<h3>  Filter:</h3>
 <form method="get" action="{% url 'home' %}" class="d-flex">
 	<ul style="display: inline;">
-		<li>
-	<select name="band">
+		<li style="display: inline;">
+	<select name="band" title="Band type">
 		<option value="metal">Metal</option>
 		<option value="leather">Leather</option>
 		<option value="silicon">Silicon</option>
 
 	</select>
 		</li>
-		<li>
-		<input name="pmax" class="form-control me-2" type="search" placeholder="Max Price" aria-label="Search">
-		<input name="pmin" class="form-control me-2" type="search" placeholder="Min Price" aria-label="Search">
+		<li style="display: inline;">
+		<input style="width: 300px;" name="pmax" class="form-control me-2" type="search" placeholder="Max Price" aria-label="Search">
+		<input style="width: 300px;" name="pmin" class="form-control me-2" type="search" placeholder="Min Price" aria-label="Search">
 		</li>
 	</ul>
 	          							<button type="submit">Filter</button>
@@ -54,7 +54,8 @@
 
 				<!-- gallery page 3 -->
 				<div id="tm-gallery-page-Мужские" class="tm-gallery-page hidden">
-					{% for product in men %}
+					{% for product in page_obj %}
+					{% if product.category.slug == 'men'%}
 					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 						<figure>
 							<img src="img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
@@ -65,12 +66,14 @@
 							</figcaption>
 						</figure>
 					</article>
+					{% endif %}
 					{% endfor %}
 
 				</div>
 				<!-- gallery page 3 -->
 				<div id="tm-gallery-page-Женские" class="tm-gallery-page hidden">
-					{% for product in women %}
+					{% for product in page_obj %}
+					{% if product.category.slug == 'women'%}
 					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 						<figure>
 							<img src="img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
@@ -81,12 +84,16 @@
 							</figcaption>
 						</figure>
 					</article>
+										{% endif %}
+
 					{% endfor %}
+
 
 				</div>
 				<!-- gallery page 4 -->
 				<div id="tm-gallery-page-Смарт-часы" class="tm-gallery-page hidden">
-					{% for product in smart %}
+					{% for product in page_obj %}
+					{% if product.category.slug == 'smart'%}
 					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 						<figure>
 							<img src="img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
@@ -97,6 +104,8 @@
 							</figcaption>
 						</figure>
 					</article>
+										{% endif %}
+
 					{% endfor %}
 
 				</div>

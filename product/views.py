@@ -39,12 +39,6 @@ class ProductListView(ListView):
     template_name = 'home.html'
     context_object_name = 'products'
 
-    def get_context_data(self, **kwargs):
-        context = super(ListView, self).get_context_data(**kwargs)
-        context['men'] = self.model.objects.filter(category='men')
-        context['women'] = self.model.objects.filter(category='women')
-        context['smart'] = self.model.objects.filter(category='smart')
-        return context
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -55,11 +49,20 @@ class ProductListView(ListView):
         price_max = self.request.GET.get('pmin')
         if band is not None:
             queryset = queryset.filter(band=band)
-        if price_min is not None:
+        if price_min:
             queryset = queryset.filter(price__lte=price_min)
-        if price_max is not None:
+        if price_max:
             queryset = queryset.filter(price__gte=price_max)
         return queryset
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(ListView, self).get_context_data(**kwargs)
+    #     context['men'] = self.model.objects.filter(category='men')
+    #     context['women'] = self.model.objects.filter(category='women')
+    #     context['smart'] = self.model.objects.filter(category='smart')
+    #     return context
+
+
 
 
 class ProductDetailView(DetailView):
