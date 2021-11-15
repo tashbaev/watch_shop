@@ -2,9 +2,11 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<form method="post" enctype="multipart/form-data">
-  {{ form }}
+<form class="tm-contact-form" style="margin-left: 60px;" method="post" enctype="multipart/form-data">
+  <div class="form-group form-group tm-d-flex">
+  {{ form.as_p }}
   {% csrf_token %}
-  <button type="submit" class="btn btn-warning">Sign up</button>
+  <button type="submit" class="tm-btn tm-btn-success">Sign up</button>
+    </div>
 </form>
 {% endblock %}
