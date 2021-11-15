@@ -14,6 +14,7 @@ class UpdateProductForm(forms.ModelForm):
         model = Product
         fields = '__all__'
 
+
 class ProductInline(InlineFormSetFactory):
     model = Product
     fields = '__all__'
