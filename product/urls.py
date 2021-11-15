@@ -1,6 +1,8 @@
+from django.conf.urls.static import static
 from django.urls import path
 
 from comment.views import ReviewAdd
+from watch_shop import settings
 from .views import ProductListView, ProductDetailView, ProductCreateView, ProductUpdateView, ProductDeleteView, \
     SearchListView, filter_product_list
 
@@ -17,3 +19,4 @@ urlpatterns = [
     path('filter/', filter_product_list, name='filter')
 
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

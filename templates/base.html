@@ -39,8 +39,14 @@ https://templatemo.com/tm-539-simple-house
 						<nav class="col-md-6 col-12 tm-nav">
 							<ul class="tm-nav-ul">
 								<li class="tm-nav-li"><a href="{% url 'home' %}" class="tm-nav-link">Home</a></li>
-								<li class="tm-nav-li"><a href="about.html" class="tm-nav-link">About</a></li>
-								<li class="tm-nav-li"><a href="contact.html" class="tm-nav-link">Contact</a></li>
+								{% if not request.user.is_authenticated %}
+								<li class="tm-nav-li"><a href="{% url 'register' %}" class="tm-nav-link">Register</a></li>
+								<li class="tm-nav-li"><a href="{% url 'login' %}" class="tm-nav-link">LogIn</a></li>
+								{% else %}
+
+								<li class="tm-nav-li"><a href="{% url 'logout' %}" class="tm-nav-link">LogOut</a></li>
+								<li class="tm-nav-li"><a href="#" class="tm-nav-link">{{ request.user }}</a></li>
+								{% endif %}
 								<li class="tm-nav-li"><form method="get" action="{% url 'search' %}" class="d-flex">
 									<input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 <!--          							<button class="btn tm-paging-link" type="submit">Search</button>-->
@@ -79,6 +85,8 @@ https://templatemo.com/tm-539-simple-house
 			});
 		});
 	</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
 
 </body>
 </html>
