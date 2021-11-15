@@ -35,7 +35,7 @@ class CategoryListView(ListView):
 
 
 class ProductListView(ListView):
-    paginate_by = 10
+    paginate_by = 8
     model = Product
     template_name = 'home.html'
     context_object_name = 'products'
