@@ -2,25 +2,27 @@
 
 {% block content %}
     <main>
+		<div style="margin-top: 30px;" class="col-md-6">
 		<h3>  Filter:</h3>
-<form method="get" action="{% url 'home' %}" class="d-flex ">
+<form method="get" action="{% url 'home' %}" class="tm-contact-form">
 	<ul style="display: inline;">
 		<li class="tm-contact-form" style="display: inline;">
-	<select name="band" title="Band type">
+	<select class="tm-form-select" name="band" title="Band type">
 		<option value="metal">Metal</option>
 		<option value="leather">Leather</option>
 		<option value="silicon">Silicon</option>
 
-	</select>
+	</select >
 		</li>
 		<li style="display: inline;">
 		<input style="width: 300px;" name="pmax" class="form-control me-2" type="search" placeholder="Max Price" aria-label="Search">
 		<input style="width: 300px;" name="pmin" class="form-control me-2" type="search" placeholder="Min Price" aria-label="Search">
 		</li>
 	</ul>
-	          							<button type="submit">Filter</button>
+	          							<button class="tm-btn tm-btn-primary" type="submit">Filter</button>
 
 </form>
+		</div>
 
 			<div class="tm-paging-links">
 				<nav>
@@ -36,7 +38,8 @@
 			<!-- Gallery -->
 			<div class="row tm-gallery">
 				<!-- gallery page 1 -->
-				<div id="tm-gallery-page-Все" class="tm-gallery-page">
+				<div class="tm-gallery-page" id="tm-gallery-page-Все" >
+
 					{% for product in page_obj %}
 					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 						<figure>
@@ -49,12 +52,13 @@
 						</figure>
 					</article>
 					{% endfor %}
+					</div>
 
-				</div>
+
 
 				<!-- gallery page 3 -->
 				<div id="tm-gallery-page-Мужские" class="tm-gallery-page hidden">
-					{% for product in page_obj %}
+					{% for product in products %}
 					{% if product.category.slug == 'men'%}
 					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 						<figure>
@@ -72,7 +76,7 @@
 				</div>
 				<!-- gallery page 3 -->
 				<div id="tm-gallery-page-Женские" class="tm-gallery-page hidden">
-					{% for product in page_obj %}
+					{% for product in products %}
 					{% if product.category.slug == 'women'%}
 					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 						<figure>
@@ -92,7 +96,7 @@
 				</div>
 				<!-- gallery page 4 -->
 				<div id="tm-gallery-page-Смарт-часы" class="tm-gallery-page hidden">
-					{% for product in page_obj %}
+					{% for product in products %}
 					{% if product.category.slug == 'smart'%}
 					<article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
 						<figure>
@@ -110,11 +114,11 @@
 
 				</div>
 			</div>
-		<div class="pagination">
+		<div class="pagination ">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <a class="tm-btn tm-btn-success" href="?page=1">&laquo; first</a>
+            <a class="tm-btn tm-btn-success" href="?page={{ page_obj.previous_page_number }}">previous</a>
         {% endif %}
 
         <span class="current">
@@ -122,8 +126,8 @@
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <a class="tm-btn tm-btn-success" href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="tm-btn tm-btn-success" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
         {% endif %}
     </span>
 </div>

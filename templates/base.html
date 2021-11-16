@@ -45,7 +45,9 @@ https://templatemo.com/tm-539-simple-house
 								{% else %}
 
 								<li class="tm-nav-li"><a href="{% url 'logout' %}" class="tm-nav-link">LogOut</a></li>
-								<li class="tm-nav-li"><a href="#" class="tm-nav-link">{{ request.user }}</a></li>
+								<li class="tm-nav-li"><p href="#" class="tm-nav-link">Logined:{{ request.user }}</p></li>
+								<li class="tm-nav-li"><a href="{% url 'product-create' %}" class="tm-nav-link">AddProduct</a></li>
+
 								{% endif %}
 								<li class="tm-nav-li"><form method="get" action="{% url 'search' %}" class="d-flex">
 									<input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
