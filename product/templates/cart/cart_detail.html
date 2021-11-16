@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load cart_tag %}
+{% load static %}
+<h1>My cart</h1>
+{% block content %}
+{% if request.session.cart.items %}
+
+{% for key,product in request.session.cart.items %}
+
+<div style="margin-left: 100px;" class="card mb-3" style="width: 18rem;">
+  <img  style="width: 60vh;" src="{{ product.image }}" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ product.name }}</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Цена: {{ product.price }}</li>
+    <li class="list-group-item">Количество: {{ product.quantity }}</li>
+    <li class="list-group-item">Сумма: {{ product.price|multiply:product.quantity  }}</li>
+  </ul>
+  <div class="card-body">
+    <a role="button" href="{% url 'item_increment' key %}" class="tm-btn tm-btn-success">Increase</a>
+    {% if not product.quantity == 1 %}
+    <a role="button" href="{% url 'item_decrement' key %}" class="tm-btn tm-btn-success">Decrease</a>
+    {% endif %}
+
+        <a role="button" class="tm-btn tm-btn-danger" href="{% url 'item_clear' key %}">Remove</a>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<h5 style="margin-left: 30px;">Your cart is emty for now...</h5>
+{% endif %}
+<a style="margin-left: 30px;" href="{% url 'cart_clear' %}">
+<img style="width: 30px; height: auto;" src="{% static 'img/trash-solid.svg' %}">
+</a>
+
+{% endblock %}

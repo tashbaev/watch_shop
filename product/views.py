@@ -83,7 +83,8 @@ class IsAdminCheckMixin(UserPassesTestMixin):
     def test_func(self):
         return self.request.user.is_authenticated and self.request.user.is_superuser
 
-class ProductCreateView(CreateWithInlinesView):
+
+class ProductCreateView(IsAdminCheckMixin, CreateWithInlinesView):
     model = Product
     inlines = [ImageInline,]
     fields = '__all__'
@@ -93,7 +94,7 @@ class ProductCreateView(CreateWithInlinesView):
         return self.object.get_absolute_url()
 
 
-class ProductUpdateView(UpdateWithInlinesView):
+class ProductUpdateView(IsAdminCheckMixin, UpdateWithInlinesView):
     model = Product
     inlines = [ImageInline, ]
     fields = '__all__'
@@ -115,7 +116,7 @@ class ProductDeleteView(IsAdminCheckMixin, DeleteView):
         self.object = self.get_object()
         slug = self.object.category.slug
         self.object.delete()
-        return redirect('list', slug)
+        return redirect('home')
 
 def filter_product_list(request):
     print(request)

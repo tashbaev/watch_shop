@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # libs
     'crispy_forms',
     'extra_views',
+    'cart',
     # 'django-filters',
 ]
 
@@ -62,7 +63,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
+
+CART_SESSION_ID = 'cart'
+
 
 ROOT_URLCONF = 'watch_shop.urls'
 
@@ -79,6 +84,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # bla...
+                'cart.context_processor.cart_total_amount',
             ],
         },
     },
